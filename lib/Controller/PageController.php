@@ -1,5 +1,5 @@
 <?php
-namespace OCA\Nmccsprules\Controller;
+namespace OCA\Nmcmarketing\Controller;
 
 use OCP\IRequest;
 use OCP\AppFramework\Http\TemplateResponse;

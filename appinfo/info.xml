@@ -1,17 +1,18 @@
 <?xml version="1.0"?>
 <info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
-    <id>nmc_csp_rules</id>
-    <name>NMC csp rules</name>
+    <id>nmc_marketing</id>
+    <name>NMC Marketing</name>
     <summary>set csp rules.</summary>
     <description><![CDATA[Set csp rules.]]></description>
     <version>0.0.1</version>
     <licence>agpl</licence>
     <author mail="sangramsinh.desai@t-systems.com">Sangramsinh Desai</author>
-    <namespace>Nmccsprules</namespace>
+    <namespace>Nmcmarketing</namespace>
     <category>customization</category>
-    <bugs>https://github.com/nextmcloud/nmc_csp_rules/issues</bugs>
+    <bugs>https://github.com/nextmcloud/nmc_marketing/issues</bugs>
     <dependencies>
         <nextcloud min-version="15" max-version="25"/>
     </dependencies>
 </info>
+

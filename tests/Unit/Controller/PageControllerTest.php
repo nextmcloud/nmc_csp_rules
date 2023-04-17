@@ -1,12 +1,12 @@
 <?php
 
-namespace OCA\Nmccsprules\Tests\Unit\Controller;
+namespace OCA\Nmcmarketing\Tests\Unit\Controller;
 
 use PHPUnit_Framework_TestCase;
 
 use OCP\AppFramework\Http\TemplateResponse;
 
-use OCA\Nmccsprules\Controller\PageController;
+use OCA\Nmcmarketing\Controller\PageController;
 
 
 class PageControllerTest extends PHPUnit_Framework_TestCase {
@@ -17,7 +17,7 @@ class PageControllerTest extends PHPUnit_Framework_TestCase {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
 
 		$this->controller = new PageController(
-			'nmc_csp_rules', $request, $this->userId
+			'nmc_marketing', $request, $this->userId
 		);
 	}
 }
