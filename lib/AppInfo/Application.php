@@ -23,30 +23,30 @@
 
 namespace OCA\Nmccsprules\AppInfo;
 
-use OCA\DAV\Connector\Sabre\Principal;
-use OCP\App\IAppManager;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
-use OCP\ILogger;
-use OCP\IServerContainer;
-use OCP\Security\CSP\AddContentSecurityPolicyEvent;
+use OCP\AppFramework\Http\ContentSecurityPolicy;
+use OCP\Security\IContentSecurityPolicyManager;
 
 class Application extends App implements IBootstrap {
-	public function __construct(array $urlParams = []) {
-		parent::__construct('nmc_csp_rules', $urlParams);
+	public const APP_ID = 'nmc_csp_rules';
+
+	public function __construct() {
+		parent::__construct(self::APP_ID);
 	}
 
 	public function register(IRegistrationContext $context): void {
-		$context->registerCapability(Capabilities::class);
-		$context->registerEventListener(AddContentSecurityPolicyEvent::class, CSPListener::class);
-		$context->registerServiceAlias('Expiration', Expiration::class);
-		$context->registerServiceAlias(ITrashManager::class, TrashManager::class);
-		/** Register $principalBackend for the DAV collection */
-		$context->registerServiceAlias('principalBackend', Principal::class);
 	}
 
 	public function boot(IBootContext $context): void {
+		$csp = new ContentSecurityPolicy();
+		$csp->addAllowedWorkerSrcDomain('\'self\'');
+		$csp->addAllowedWorkerSrcDomain('blob:');
+		$csp->useStrictDynamic(true);
+		$csp->addAllowedFontDomain('https://ebs10.telekom.de');
+		$cspManager = $context->getServerContainer()->query(IContentSecurityPolicyManager::class);
+		$cspManager->addDefaultPolicy($csp);
 	}
 }
