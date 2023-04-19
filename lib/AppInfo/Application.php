@@ -30,12 +30,6 @@ class Application extends App implements IBootstrap {
 	}
 
 	public function boot(IBootContext $context): void {
-		/*$csp = new ContentSecurityPolicy();
-		$csp->addAllowedWorkerSrcDomain('\'self\'');
-		$csp->addAllowedWorkerSrcDomain('blob:');
-		$csp->useStrictDynamic(true);
-		$csp->addAllowedFontDomain('https://ebs10.telekom.de');
-		$cspManager = $context->getServerContainer()->query(IContentSecurityPolicyManager::class);
-		$cspManager->addDefaultPolicy($csp);*/
+
 	}
 }
