@@ -34,6 +34,12 @@ class AppConfig {
 		'token_ttl' => 36000, // 10 hours
 	];
 
+	public $trusted_urls = [
+		0 => 'https://ebs10.telekom.de/opt-in/',
+		1 => 'https://pix.telekom.de/',
+		2=>'http://fbc.wcfbc.net/',		
+	];
+	
 	public const WATERMARK_APP_NAMESPACE = 'files';
 
 	public const APP_SETTING_TYPES = [
@@ -174,4 +180,6 @@ class AppConfig {
 		}
 		return [];
 	}
+
+
 }

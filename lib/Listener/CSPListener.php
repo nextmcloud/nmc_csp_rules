@@ -38,14 +38,8 @@ class CSPListener implements IEventListener {
 		if (!$this->isPageLoad()) {
 			return;
 		}
-
-		$urls = array_merge(
-			[ $this->domainOnly($this->config->getnmcMarketingUrlPublic()) ],
-			$this->getGSDomains()
-		);
-
-		$urls = array_filter($urls);
-
+		
+		$urls= $this->config->trusted_urls;
 		$policy = new EmptyContentSecurityPolicy();
 		$policy->addAllowedFrameDomain("'self'");
 		$policy->useStrictDynamic(true);
@@ -57,7 +51,6 @@ class CSPListener implements IEventListener {
 			$policy->addAllowedImageDomain($url);
 			$policy->addAllowedFontDomain($url);
 		}
-
 		$event->addPolicy($policy);
 	}
 
@@ -70,10 +63,8 @@ class CSPListener implements IEventListener {
 		if (!$this->globalScaleConfig->isGlobalScaleEnabled()) {
 			return [];
 		}
-
 		return $this->config->getGlobalScaleTrustedHosts();
 	}
-
 
 	/**
 	 * Strips the path and query parameters from the URL.
@@ -86,5 +77,4 @@ class CSPListener implements IEventListener {
 		return "$scheme$host$port";
 
 	}
-
 }
