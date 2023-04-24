@@ -34,12 +34,7 @@ class AppConfig {
 		'token_ttl' => 36000, // 10 hours
 	];
 
-	public $trusted_urls = [
-		0 => 'https://ebs10.telekom.de/opt-in/',
-		1 => 'https://pix.telekom.de/',
-		2=>'http://fbc.wcfbc.net/',		
-	];
-	
+
 	public const WATERMARK_APP_NAMESPACE = 'files';
 
 	public const APP_SETTING_TYPES = [
@@ -61,7 +56,17 @@ class AppConfig {
 		}
 		return Application::APPNAME;
 	}
-
+	/*
+	*Get config values from main server config and merge two array's 
+	*into one returning array
+	*/
+	public function getConfigValues(){
+		$config = \OC::$server->get(IConfig::class);
+		$trustedFontUrls = $config->getSystemValue('trusted_urls');
+		$trustedImageUrlConfig = $config->getSystemValue('trusted_image_urls');
+		$trustedConfig = array('trusted_font_urls'=>$trustedFontUrls,'trusted_image_urls'=>$trustedImageUrlConfig);
+		return $trustedConfig;
+	}
 	/**
 	 * Get a value by key
 	 * @param string $key
