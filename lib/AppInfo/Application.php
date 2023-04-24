@@ -2,19 +2,12 @@
 
 namespace OCA\Nmcmarketing\AppInfo;
 
-// use OCA\Richdocuments\Capabilities;
 use OCA\Nmcmarketing\Listener\CSPListener;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
-use OCP\Files\Template\FileCreatedFromTemplateEvent;
-use OCP\Files\Template\ITemplateManager;
-use OCP\Files\Template\TemplateFileCreator;
 use OCP\IConfig;
-use OCP\IL10N;
-use OCP\IPreview;
-use OCP\Preview\BeforePreviewFetchedEvent;
 use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 
 class Application extends App implements IBootstrap {

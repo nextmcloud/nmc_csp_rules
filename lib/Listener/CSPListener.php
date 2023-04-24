@@ -7,12 +7,8 @@ namespace OCA\Nmcmarketing\Listener;
 use OCA\Nmcmarketing\AppInfo\Application;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
-use OCP\Util;
-
 use OCA\Nmcmarketing\AppConfig;
-use OCP\App\IAppManager;
 use OCP\AppFramework\Http\EmptyContentSecurityPolicy;
-use OCP\GlobalScale\IConfig as GlobalScaleConfig;
 use OCP\IRequest;
 use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 
@@ -37,7 +33,6 @@ class CSPListener implements IEventListener {
 
 		$configValues = $this->config->getConfigValues();
 		$policy = new EmptyContentSecurityPolicy();
-		$policy->addAllowedFrameDomain("'self'");
 		$policy->useStrictDynamic(true);
 		
 		foreach ($configValues['trusted_font_urls'] as $trusted_url) {
