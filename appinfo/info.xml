@@ -3,8 +3,8 @@
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>nmc_marketing</id>
     <name>NMC Marketing</name>
-    <summary>set csp rules.</summary>
-    <description><![CDATA[Set csp rules.]]></description>
+	<summary>This app add custom CSP rules specific to Next Magenta Cloud application</summary>
+	<description>Once this app enabled it will add csp rules specific to Next Magenta Cloud application</description>
     <version>0.0.1</version>
     <licence>agpl</licence>
     <author mail="sangramsinh.desai@t-systems.com">Sangramsinh Desai</author>

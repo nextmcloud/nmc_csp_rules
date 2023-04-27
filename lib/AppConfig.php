@@ -4,7 +4,7 @@
  *
  * @author sangramsinh desai
  * Email  sangramsinh.desai@t-systems.com
- * 
+ *
  */
 
 namespace OCA\Nmcmarketing;
@@ -22,12 +22,17 @@ class AppConfig {
 	}
 
 	/*
-	*Get config values from main server config and create associative array and return that array 
+	* Return trusted font urls array from server config
 	*/
-	public function getConfigValues(){
-		$trustedFontUrls = $this->config->getSystemValue('trusted_font_urls');
-		$trustedImageUrlConfig = $this->config->getSystemValue('trusted_image_urls');
-		$trustedConfig = array('trusted_font_urls'=>$trustedFontUrls,'trusted_image_urls'=>$trustedImageUrlConfig);
-		return $trustedConfig;
-	}	
+	public function getTrustedFontUrls(){
+		return $this->config->getSystemValue('trusted_font_urls');
+	}
+
+	/*
+	* Return trusted image urls array from server config
+	*/
+	public function getTrustedImageUrls(){
+		return $this->config->getSystemValue('trusted_image_urls');
+	}
+
 }

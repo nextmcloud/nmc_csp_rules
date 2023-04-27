@@ -31,14 +31,16 @@ class CSPListener implements IEventListener {
 			return;
 		}
 
-		$configValues = $this->config->getConfigValues();
 		$policy = new EmptyContentSecurityPolicy();
 		$policy->useStrictDynamic(true);
-		
-		foreach ($configValues['trusted_font_urls'] as $trusted_url) {
+
+		$trustedImageUrls= $this->config->getTrustedFontUrls();
+		foreach ($trustedImageUrls as $trusted_url) {
 			$policy->addAllowedFontDomain($trusted_url);
 		}
-		foreach ($configValues['trusted_image_urls'] as $image_url) {
+
+		$trustedFontUrls = $this->config->getTrustedImageUrls();
+		foreach ($trustedFontUrls as $image_url) {
 			$policy->addAllowedImageDomain($image_url);
 		}
 		$event->addPolicy($policy);
