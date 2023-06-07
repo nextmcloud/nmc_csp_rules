@@ -32,15 +32,18 @@ class CSPListener implements IEventListener {
 		}
 
 		$policy = new EmptyContentSecurityPolicy();
+        $policy->allowInlineScript(false);
 		$policy->useStrictDynamic(true);
 
-		$trustedImageUrls= $this->config->getTrustedFontUrls();
-		foreach ($trustedImageUrls as $trusted_url) {
+		foreach ($this->config->getSystemValue('trusted_script_urls') as $trusted_url) {
+			$policy->addAllowedScriptDomain($trusted_url);
+		}
+
+		foreach ($this->config->getTrustedFontUrls() as $trusted_url) {
 			$policy->addAllowedFontDomain($trusted_url);
 		}
 
-		$trustedFontUrls = $this->config->getTrustedImageUrls();
-		foreach ($trustedFontUrls as $image_url) {
+		foreach ($this->config->getTrustedImageUrls() as $image_url) {
 			$policy->addAllowedImageDomain($image_url);
 		}
 		$event->addPolicy($policy);

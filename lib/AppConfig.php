@@ -34,5 +34,4 @@ class AppConfig {
 	public function getTrustedImageUrls(){
 		return $this->config->getSystemValue('trusted_image_urls');
 	}
-
 }
