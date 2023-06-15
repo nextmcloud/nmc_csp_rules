@@ -20,18 +20,4 @@ class AppConfig {
 	public function __construct(IConfig $config) {
 		$this->config = $config;
 	}
-
-	/*
-	* Return trusted font urls array from server config
-	*/
-	public function getTrustedFontUrls(){
-		return $this->config->getSystemValue('trusted_font_urls');
-	}
-
-	/*
-	* Return trusted image urls array from server config
-	*/
-	public function getTrustedImageUrls(){
-		return $this->config->getSystemValue('trusted_image_urls');
-	}
 }
