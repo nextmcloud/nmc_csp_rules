@@ -30,7 +30,6 @@ class CSPListener implements IEventListener {
         }
 
         $marketing_config = $this->iConfig->getSystemValue("nmc_marketing");
-        var_dump($marketing_config['trusted_script_urls']);
 
         $policy = new EmptyContentSecurityPolicy();
         $policy->useStrictDynamic(true);
