@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OCA\NmcMarketing\Listener;
 
+use OC\Log;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\EventDispatcher\Event;
@@ -30,12 +31,20 @@ class CSPListener implements IEventListener {
         }
 
         $marketing_config = $this->iConfig->getSystemValue("nmc_marketing");
+        $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
         $policy = new EmptyContentSecurityPolicy();
         $policy->useStrictDynamic(true);
 
         foreach ($marketing_config['trusted_script_urls'] as $trusted_url) {
             $policy->addAllowedScriptDomain($this->domainOnly($trusted_url));
+        }
+
+        if (strpos($userAgent, 'Edg') !== false ||
+            strpos($userAgent, 'MSIE') !== false) {
+            if ($this->request->getRequestUri() === '/' || $this->request->getRequestUri() === '/login') {
+                $policy->addAllowedScriptDomain("'unsafe-inline'");
+            }
         }
 
         foreach ($marketing_config['trusted_font_urls'] as $trusted_url) {
