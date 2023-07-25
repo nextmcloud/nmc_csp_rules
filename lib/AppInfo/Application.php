@@ -1,13 +1,12 @@
 <?php
 
-namespace OCA\Nmcmarketing\AppInfo;
+namespace OCA\NmcMarketing\AppInfo;
 
-use OCA\Nmcmarketing\Listener\CSPListener;
+use OCA\NmcMarketing\Listener\CSPListener;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
-use OCP\IConfig;
 use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 
 class Application extends App implements IBootstrap {
