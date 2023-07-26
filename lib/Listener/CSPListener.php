@@ -31,16 +31,21 @@ class CSPListener implements IEventListener
             return;
         }
 
+		//This loading from the config the trusted urls
         $marketing_config = $this->iConfig->getSystemValue("nmc_marketing");
+
+		//This is the user agent
         $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
         $policy = new EmptyContentSecurityPolicy();
         $policy->useStrictDynamic(true);
 
+		//This add the trusted script urls to the CSP
         foreach ($marketing_config['trusted_script_urls'] as $trusted_url) {
             $policy->addAllowedScriptDomain($this->domainOnly($trusted_url));
         }
 
+		//This is the exception for specific user agents
         if (str_contains($userAgent, 'Edg') ||
 			str_contains($userAgent, 'MSIE')) {
             if ($this->request->getRequestUri() === '/' || $this->request->getRequestUri() === '/login') {
@@ -48,15 +53,19 @@ class CSPListener implements IEventListener
             }
         }
 
-        foreach ($marketing_config['trusted_font_urls'] as $trusted_url) {
-            $policy->addAllowedFontDomain($this->domainOnly($trusted_url));
-        }
+		//This add the trusted font urls to the CSP
+		foreach ($marketing_config['trusted_font_urls'] as $trusted_url) {
+			$policy->addAllowedFontDomain($this->domainOnly($trusted_url));
+		}
 
-        foreach ($marketing_config['trusted_image_urls'] as $image_url) {
-            $policy->addAllowedImageDomain($this->domainOnly($image_url));
-        }
-        $event->addPolicy($policy);
-    }
+		//This add the trusted image urls to the CSP
+		foreach ($marketing_config['trusted_image_urls'] as $image_url) {
+			$policy->addAllowedImageDomain($this->domainOnly($image_url));
+		}
+
+		//Add the policy to the event
+		$event->addPolicy($policy);
+	}
 
     private function isPageLoad(): bool {
         $scriptNameParts = explode('/', $this->request->getScriptName());

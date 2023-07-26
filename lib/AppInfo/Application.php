@@ -17,6 +17,7 @@ class Application extends App implements IBootstrap {
 	}
 
 	public function register(IRegistrationContext $context): void {
+		//Register the CSPListener
 		$context->registerEventListener(AddContentSecurityPolicyEvent::class, CSPListener::class);
 	}
 
