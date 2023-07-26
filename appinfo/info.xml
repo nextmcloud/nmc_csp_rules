@@ -5,7 +5,7 @@
     <name>NMC Marketing</name>
 	<summary>This app add custom CSP rules specific to Next Magenta Cloud application</summary>
 	<description>Once this app enabled it will add csp rules specific to Next Magenta Cloud application</description>
-    <version>0.0.1</version>
+    <version>0.0.5</version>
     <licence>agpl</licence>
     <author mail="sangramsinh.desai@t-systems.com">Sangramsinh Desai</author>
     <namespace>NmcMarketing</namespace>
