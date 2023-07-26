@@ -48,6 +48,7 @@ class CSPListener implements IEventListener
 		//This is the exception for specific user agents
         if (str_contains($userAgent, 'Edg') ||
 			str_contains($userAgent, 'MSIE')) {
+			//Add only when request url is / or /login
             if ($this->request->getRequestUri() === '/' || $this->request->getRequestUri() === '/login') {
                 $policy->addAllowedScriptDomain("'unsafe-inline'");
             }
