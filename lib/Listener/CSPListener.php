@@ -41,8 +41,8 @@ class CSPListener implements IEventListener
             $policy->addAllowedScriptDomain($this->domainOnly($trusted_url));
         }
 
-        if (strpos($userAgent, 'Edg') !== false ||
-            strpos($userAgent, 'MSIE') !== false) {
+        if (str_contains($userAgent, 'Edg') ||
+			str_contains($userAgent, 'MSIE')) {
             if ($this->request->getRequestUri() === '/' || $this->request->getRequestUri() === '/login') {
                 $policy->addAllowedScriptDomain("'unsafe-inline'");
             }

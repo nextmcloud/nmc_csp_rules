@@ -11,7 +11,6 @@ use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'nmc_marketing';
-	public const APPNAME = 'nmc_marketing';
 
 	public function __construct() {
 		parent::__construct(self::APP_ID);
