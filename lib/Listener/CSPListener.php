@@ -34,9 +34,6 @@ class CSPListener implements IEventListener
 		//This loading from the config the trusted urls
         $marketing_config = $this->iConfig->getSystemValue("nmc_marketing");
 
-		//This is the user agent
-        $userAgent = $_SERVER['HTTP_USER_AGENT'];
-
         $policy = new EmptyContentSecurityPolicy();
         $policy->useStrictDynamic(true);
 
@@ -46,7 +43,7 @@ class CSPListener implements IEventListener
         }
 
 		//This is the exception for specific user agents
-        if ($this->request->getRequestUri() === '/' || $this->request->getRequestUri() === '/login') {
+        if ($this->request->getPathInfo() === '/' || $this->request->getPathInfo() === '/login') {
             $policy->addAllowedScriptDomain("'unsafe-inline'");
         }
 
