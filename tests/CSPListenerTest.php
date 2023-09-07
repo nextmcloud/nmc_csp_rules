@@ -13,7 +13,6 @@ declare(strict_types=1);
 use OC\Security\CSP\ContentSecurityPolicyManager;
 use OCA\Nmcmarketing\AppConfig;
 use OCA\Nmcmarketing\Listener\CSPListener;
-use OCP\App\IAppManager;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IRequest;
@@ -73,4 +72,3 @@ class CSPListenerTest extends TestCase {
 	}
 
 }
-
