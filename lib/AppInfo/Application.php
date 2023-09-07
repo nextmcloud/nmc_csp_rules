@@ -8,6 +8,8 @@ use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\Security\CSP\AddContentSecurityPolicyEvent;
+use OCP\AppFramework\Http\Events\BeforeTemplateRenderedEvent;
+use OCA\NmcMarketing\Listener\BeforeTemplateRenderedListener;
 
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'nmc_marketing';
@@ -17,8 +19,9 @@ class Application extends App implements IBootstrap {
 	}
 
 	public function register(IRegistrationContext $context): void {
-		//Register the CSPListener
+		//Register the CSPListener and consent layer redirect brake
 		$context->registerEventListener(AddContentSecurityPolicyEvent::class, CSPListener::class);
+        $context->registerEventListener(BeforeTemplateRenderedEvent::class, BeforeTemplateRenderedListener::class);
 	}
 
 	public function boot(IBootContext $context): void {
