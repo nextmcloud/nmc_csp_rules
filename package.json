@@ -45,11 +45,11 @@
         "stylelint": "^15.10.3"
     },
     "scripts": {
-        "build": "npm run build:webpack",
+        //"build": "npm run build:webpack",
         "lint": "eslint js",
         "lint:fix": "eslint js --fix",
-        "build:webpack": "webpack --node-env development --progress",
-        "build:watch": "webpack --node-env development --progress --watch",
+        //"build:webpack": "webpack --node-env development --progress",
+        //"build:watch": "webpack --node-env development --progress --watch",
         "stylelint": "stylelint css",
         "stylelint:fix": "stylelint css --fix",
         "test": "jest --verbose",
