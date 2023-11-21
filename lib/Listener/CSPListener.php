@@ -40,8 +40,10 @@ class CSPListener implements IEventListener {
 			$policy->addAllowedScriptDomain($this->domainOnly($trusted_url));
 		}
 
-		//This is the exception for specific user agents
-		if ($this->request->getPathInfo() === '/' || $this->request->getPathInfo() === '/login') {
+		//This is the exception for specific user agents and pages
+		if ($this->request->getPathInfo() === '/' ||
+			 $this->request->getPathInfo() === '/login' ||
+			 $this->request->getPathInfo() === '/login/flow/grant') {
 			$policy->addAllowedScriptDomain("'unsafe-inline'");
 		}
 
