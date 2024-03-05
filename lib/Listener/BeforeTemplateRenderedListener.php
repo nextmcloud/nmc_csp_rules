@@ -48,5 +48,6 @@ class BeforeTemplateRenderedListener implements IEventListener {
 		
 		// add marketing tracking magic
 		\OCP\Util::addScript("nmc_marketing", "consent");
+		\OCP\Util::addScript("nmc_marketing", "tracking");
 	}
 }
