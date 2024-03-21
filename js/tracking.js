@@ -118,7 +118,7 @@ window.addEventListener('load', function() {
 		const navigation = event.target.closest('[id]')
 		if (navigation) {
 			utag.view({
-				wt_link_id: `link.${navigation.attributes['id'].value}`,
+				wt_link_id: `link.${navigation.attributes.id.value}`,
 				page_content_id: 'header.right',
 				page_type: 'header',
 			})
