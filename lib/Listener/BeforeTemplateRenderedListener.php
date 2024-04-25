@@ -14,39 +14,62 @@ namespace OCA\NmcMarketing\Listener;
 use OC\Security\CSP\ContentSecurityPolicyNonceManager;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
-
 use OCP\IConfig;
+use OCP\IRequest;
 
 class BeforeTemplateRenderedListener implements IEventListener {
 	private IConfig $config;
+	private IRequest $request;
 	private ContentSecurityPolicyNonceManager $nonceManager;
+	private array $mobileUserAgents;
 
 	public function __construct(
-		IConfig $config,
-		ContentSecurityPolicyNonceManager $nonceManager
+			IConfig $config,
+			IRequest $request,
+			ContentSecurityPolicyNonceManager $nonceManager
 	) {
-		$this->config = $config;
-		$this->nonceManager = $nonceManager;
+			$this->config = $config;
+			$this->request = $request;
+			$this->nonceManager = $nonceManager;
+			$this->mobileUserAgents = $config->getSystemValue('nmc_marketing.mobile_user_agents', [
+				'/^Mozilla\/5\.0 \(Android\) Nextcloud\-android\/(?<version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)).*$/',
+				'/^Mozilla\/5\.0 \(iOS\) Nextcloud\-iOS\/(?<version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)).*$/',
+			]);
 	}
 
 	public function handle(Event $event): void {
 		$response = $event->getResponse();
+		$userAgent = $this->request->getHeader('USER_AGENT');
 
+		// no consent layer for mobile clients
+		if (!$this->isMobileUserAgent($userAgent)) {
+			$marketing_config = $this->config->getSystemValue("nmc_marketing");
+			$utagUrl = $marketing_config['url'];
 
-		$marketing_config = $this->config->getSystemValue("nmc_marketing");
-		$utagUrl = $marketing_config['url'];
-		// the marketing tooling is controlled by CSP, so save nonce is mandatory
-		$nonce = $this->nonceManager->getNonce();
-		// we want to invalidate script url remotely with cachebuster
-		$cacheBusterVal = $this->config->getAppValue('theming', 'cachebuster', '0');
+			// the marketing tooling is controlled by CSP, so save nonce is mandatory
+			$nonce = $this->nonceManager->getNonce();
 
-		// add utag from external CDN
-		\OCP\Util::addHeader("script",
-			[ 'nonce' => $nonce,
-				'src' => $utagUrl . '?nmcv=' . $cacheBusterVal],
-			''); // the empty text is needed to generate HTML5 valid tags
-		
-		// add marketing tracking magic
-		\OCP\Util::addScript("nmc_marketing", "consent");
+			// we want to invalidate script url remotely with cachebuster
+			$cacheBusterVal = $this->config->getAppValue('theming', 'cachebuster', '0');
+
+			// add utag from external CDN
+			\OCP\Util::addHeader("script", [ 'nonce' => $nonce, 'src' => $utagUrl . '?nmcv=' . $cacheBusterVal], ''); // the empty text is needed to generate HTML5 valid tags
+
+			// add marketing tracking magic
+			\OCP\Util::addScript("nmc_marketing", "consent");
+		}
+	}
+
+	/**
+	 * Check whether request comes from a mobile client
+	 */
+	private function isMobileUserAgent(string $userAgent): bool {
+		foreach ($this->mobileUserAgents as $mobileUserAgent) {
+			
+			if (preg_match($mobileUserAgent, $userAgent, $matches)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
