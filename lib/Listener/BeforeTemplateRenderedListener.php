@@ -24,17 +24,17 @@ class BeforeTemplateRenderedListener implements IEventListener {
 	private array $mobileUserAgents;
 
 	public function __construct(
-			IConfig $config,
-			IRequest $request,
-			ContentSecurityPolicyNonceManager $nonceManager
+		IConfig $config,
+		IRequest $request,
+		ContentSecurityPolicyNonceManager $nonceManager
 	) {
-			$this->config = $config;
-			$this->request = $request;
-			$this->nonceManager = $nonceManager;
-			$this->mobileUserAgents = $config->getSystemValue('nmc_marketing.mobile_user_agents', [
-				'/^Mozilla\/5\.0 \(Android\) Nextcloud\-android\/(?<version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)).*$/',
-				'/^Mozilla\/5\.0 \(iOS\) Nextcloud\-iOS\/(?<version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)).*$/',
-			]);
+		$this->config = $config;
+		$this->request = $request;
+		$this->nonceManager = $nonceManager;
+		$this->mobileUserAgents = $config->getSystemValue('nmc_marketing.mobile_user_agents', [
+			'/^Mozilla\/5\.0 \(Android\) Nextcloud\-android\/(?<version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)).*$/',
+			'/^Mozilla\/5\.0 \(iOS\) Nextcloud\-iOS\/(?<version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)).*$/',
+		]);
 	}
 
 	public function handle(Event $event): void {
