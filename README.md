@@ -15,6 +15,15 @@ Add below in server config
 'trusted_font_urls'=>array(0 => 'https://ebs10.telekom.de/opt-in/',),
 'trusted_image_urls'=>array(0 => 'https://pix.telekom.de/',1=>'http://fbc.wcfbc.net/',)
 
+```php
+// config/config.php
+    ...,
+    // In order to deactivate the consent layer for the mobile clients we have to configure the identifiable user agents of those clients
+    'nmc_marketing.mobile_user_agents' => [
+        '/^Mozilla\/5\.0 \(Android\) Nextcloud\-android\/(?<version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)).*$/',
+        '/^Mozilla\/5\.0 \(iOS\) Nextcloud\-iOS\/(?<version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)).*$/',
+    ]
+```
 
 ### App Repository 
 https://github.com/nextmcloud/nmc_marketing/tree/nmcfeat/master
