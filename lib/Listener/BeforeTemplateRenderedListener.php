@@ -42,7 +42,7 @@ class BeforeTemplateRenderedListener implements IEventListener {
 			'Magenta-iOS',
 			'(Android)',
 			'(iOS)',
-		  ]);
+		]);
 	}
 
 	public function handle(Event $event): void {
@@ -74,7 +74,7 @@ class BeforeTemplateRenderedListener implements IEventListener {
 	private function isMobileUserAgent(string $userAgent): bool {
 
 		foreach ($this->mobileUserAgents as $mobileUserAgent) {
-			if (str_contains($userAgent, $mobileUserAgent)) { 
+			if (str_contains($userAgent, $mobileUserAgent)) {
 				return true;
 			}
 		}
