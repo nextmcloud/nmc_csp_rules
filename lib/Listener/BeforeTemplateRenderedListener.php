@@ -32,8 +32,16 @@ class BeforeTemplateRenderedListener implements IEventListener {
 		$this->request = $request;
 		$this->nonceManager = $nonceManager;
 		$this->mobileUserAgents = $config->getSystemValue('nmc_marketing.mobile_user_agents', [
-			'/^Mozilla\/5\.0 \(Android\) Nextcloud\-android\/(?<version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)).*$/',
-			'/^Mozilla\/5\.0 \(iOS\) Nextcloud\-iOS\/(?<version>(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)).*$/',
+			'Nextcloud-android',
+			'MagentaCLOUD-android',
+			'Magenta-android',
+			'Nextcloud-iOS',
+			'MagentaCLOUD-iOS',
+			'Nextcloud iOS',
+			'MagentaCLOUD iOS',
+			'Magenta-iOS',
+			'(Android)',
+			'(iOS)',
 		]);
 	}
 
@@ -64,12 +72,13 @@ class BeforeTemplateRenderedListener implements IEventListener {
 	 * Check whether request comes from a mobile client
 	 */
 	private function isMobileUserAgent(string $userAgent): bool {
+
 		foreach ($this->mobileUserAgents as $mobileUserAgent) {
-			
-			if (preg_match($mobileUserAgent, $userAgent, $matches)) {
+			if (str_contains($userAgent, $mobileUserAgent)) {
 				return true;
 			}
 		}
+
 		return false;
 	}
 }
