@@ -13,7 +13,7 @@
     <category>customization</category>
     <bugs>https://github.com/nextmcloud/nmc_marketing/issues</bugs>
     <dependencies>
-        <nextcloud min-version="15" max-version="28"/>
+        <nextcloud min-version="15" max-version="30"/>
     </dependencies>
 </info>
 
