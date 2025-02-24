@@ -5,7 +5,7 @@
     <name>NMC Marketing</name>
 	<summary>Marketing tracking aspects for MagentaCLOUD</summary>
 	<description>Scripting and CSP rulset to integrate Telekom standard consent and marketing tracking</description>
-    <version>0.0.5</version>
+    <version>1.1.0</version>
     <licence>agpl</licence>
     <author mail="bernd.rederlechner@t-systems.com">B. Rederlechner</author>
     <author mail="daniel.engelschalk@gitcom.cloud">D. Engelschalk</author>
